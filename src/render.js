@@ -27,9 +27,6 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Git History Timeline — @${username}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0d1117;
@@ -40,18 +37,17 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       --text-muted: #6e7681;
       --border-color: #30363d;
       --accent: #58a6ff;
-      --accent-glow: rgba(88, 166, 255, 0.3);
       
-      /* Contribution colors - high contrast for dark mode */
-      --level-0: #2d333b;
+      /* Contribution colors - visible on dark background */
+      --level-0: #21262d;
       --level-1: #0e4429;
       --level-2: #006d32;
       --level-3: #26a641;
       --level-4: #39d353;
       
-      --cell-size: 10px;
+      --cell-size: 11px;
       --cell-gap: 3px;
-      --border-radius: 2px;
+      --cell-radius: 2px;
     }
 
     [data-theme="light"] {
@@ -63,9 +59,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       --text-muted: #57606a;
       --border-color: #d0d7de;
       --accent: #0969da;
-      --accent-glow: rgba(9, 105, 218, 0.2);
       
-      /* Contribution colors - matches GitHub exactly */
       --level-0: #ebedf0;
       --level-1: #9be9a8;
       --level-2: #40c463;
@@ -79,111 +73,90 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       padding: 0;
     }
 
-    body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
-    /* Background pattern */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 20%, var(--accent-glow) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(46, 160, 67, 0.15) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 1rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 2rem;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.4rem 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      z-index: 1000;
+      transition: all 0.15s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: var(--bg-tertiary);
     }
 
     /* Header */
     header {
       text-align: center;
-      padding: 3rem 0 4rem;
+      padding: 1.5rem 0 2rem;
+      margin-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-color);
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .logo {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 1.75rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
     }
 
     .username {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.25rem;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+      font-size: 1rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .stats {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.25rem;
       color: var(--text-secondary);
-      font-size: 1rem;
+      font-size: 0.85rem;
     }
 
     .stat {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.3rem;
     }
 
     .stat-value {
       font-weight: 600;
       color: var(--text-primary);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
     }
 
-    /* Theme toggle */
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 0.5rem;
-      cursor: pointer;
-      color: var(--text-secondary);
-      font-size: 1.25rem;
-      transition: all 0.2s ease;
-    }
-
-    .theme-toggle:hover {
-      color: var(--text-primary);
-      border-color: var(--accent);
-    }
-
-    /* Timeline */
+    /* Timeline with vertical line */
     .timeline {
       position: relative;
-      padding-left: 2rem;
+      padding-left: 1.5rem;
     }
 
     .timeline::before {
@@ -193,63 +166,57 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(
-        to bottom,
-        var(--accent),
-        var(--level-4),
-        var(--level-3),
-        var(--level-2),
-        var(--border-color)
-      );
+      background: linear-gradient(to bottom, var(--accent), var(--level-3), var(--border-color));
       border-radius: 1px;
     }
 
     /* Year section */
     .year-section {
-      margin-bottom: 4rem;
       position: relative;
+      margin-bottom: 2.5rem;
     }
 
-    .year-marker {
+    .year-section::before {
+      content: '';
       position: absolute;
-      left: -2rem;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
+      left: -1.5rem;
+      top: 0.5rem;
+      width: 10px;
+      height: 10px;
       background: var(--bg-primary);
       border: 2px solid var(--accent);
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-glow);
+      transform: translateX(-50%);
     }
 
     .year-header {
       display: flex;
       align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
     }
 
     .year-title {
-      font-size: 2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--text-primary);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
     }
 
     .year-count {
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
     }
 
-    /* Contribution graph */
+    /* Contribution graph - centered, fit content */
     .graph-container {
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      overflow-x: auto;
-      display: inline-block;
-      max-width: 100%;
+      border-radius: 6px;
+      padding: 0.75rem;
+      display: table; /* Shrink to fit content */
+      margin: 0 auto; /* Center horizontally */
     }
 
     .graph {
@@ -268,7 +235,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     .month-label {
       font-size: 0.7rem;
       color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
     }
 
     .graph-body {
@@ -289,7 +256,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       height: var(--cell-size);
       font-size: 0.65rem;
       color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
       display: flex;
       align-items: center;
       visibility: hidden;
@@ -316,7 +283,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     .day {
       width: var(--cell-size);
       height: var(--cell-size);
-      border-radius: var(--border-radius);
+      border-radius: var(--cell-radius);
       background: var(--level-0);
       cursor: pointer;
       transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -324,9 +291,9 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     }
 
     .day:hover {
-      transform: scale(1.4);
+      transform: scale(1.3);
       z-index: 10;
-      box-shadow: 0 0 8px var(--accent-glow);
+      box-shadow: 0 0 6px rgba(88, 166, 255, 0.4);
     }
 
     .day.outside {
@@ -344,44 +311,36 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     .day.level-3 { background: var(--level-3); }
     .day.level-4 { background: var(--level-4); }
 
-    /* Tooltip */
-    .day::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
+    /* Tooltip - rendered via JavaScript */
+    .tooltip {
+      position: fixed;
       background: var(--bg-tertiary);
       color: var(--text-primary);
-      padding: 0.5rem 0.75rem;
+      padding: 0.4rem 0.6rem;
       border-radius: 6px;
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
       white-space: nowrap;
-      opacity: 0;
       pointer-events: none;
-      transition: opacity 0.15s ease;
       border: 1px solid var(--border-color);
-      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.1s ease;
     }
 
-    .day:hover::after {
+    .tooltip.visible {
       opacity: 1;
-    }
-
-    .day.outside::after {
-      display: none;
     }
 
     /* Legend */
     .legend {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: flex-end;
       gap: 0.35rem;
-      margin-top: 0.75rem;
-      padding-left: 28px;
-      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
 
@@ -393,7 +352,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     .legend-cell {
       width: var(--cell-size);
       height: var(--cell-size);
-      border-radius: var(--border-radius);
+      border-radius: var(--cell-radius);
     }
 
     /* Footer */
@@ -415,152 +374,89 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       text-decoration: underline;
     }
 
-    /* Responsive - Tablet */
-    @media (max-width: 900px) {
-      .container {
-        padding: 1rem;
+    /* Responsive - Calculate cell size to fit 52 weeks */
+    /* Formula: (screen - padding - dayLabels) / 52 weeks / (cell + gap) */
+    
+    @media (max-width: 800px) {
+      :root {
+        --cell-size: 10px;
+        --cell-gap: 2px;
       }
-
-      header {
-        padding: 2rem 0;
-      }
-
-      h1 {
-        font-size: 1.75rem;
-      }
-
-      .stats {
-        gap: 1rem;
-      }
-
-      .timeline {
-        padding-left: 1rem;
-      }
-
-      .year-title {
-        font-size: 1.5rem;
-      }
+      
+      body { padding: 0.75rem; }
+      
+      .timeline { padding-left: 1.25rem; }
+      .year-section::before { left: -1.25rem; width: 8px; height: 8px; }
+      
+      h1 { font-size: 1.5rem; }
+      header { padding: 1rem 0 1.5rem; margin-bottom: 1rem; }
     }
 
-    /* Responsive - Mobile */
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       :root {
         --cell-size: 8px;
         --cell-gap: 2px;
       }
-
-      .container {
-        padding: 0.75rem;
-      }
-
-      header {
-        padding: 1.5rem 0;
-      }
-
-      .logo {
-        font-size: 2rem;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .username {
-        font-size: 1rem;
-      }
-
-      .stats {
-        flex-direction: column;
-        gap: 0.25rem;
-        font-size: 0.875rem;
-      }
-
-      .theme-toggle {
-        top: 0.5rem;
-        right: 0.5rem;
-        padding: 0.35rem;
-        font-size: 1rem;
-      }
-
-      .timeline {
-        padding-left: 0.75rem;
-      }
-
-      .timeline::before {
-        left: -0.25rem;
-      }
-
-      .year-marker {
-        left: -0.75rem;
-        width: 8px;
-        height: 8px;
-      }
-
-      .year-section {
-        margin-bottom: 2rem;
-      }
-
-      .year-header {
-        flex-direction: column;
-        gap: 0.25rem;
-        margin-bottom: 1rem;
-      }
-
-      .year-title {
-        font-size: 1.25rem;
-      }
-
-      .year-count {
-        font-size: 0.875rem;
-      }
-
-      .graph-container {
-        padding: 0.75rem;
-        border-radius: 8px;
-      }
-
-      .day-labels {
-        width: 18px;
-        margin-right: 2px;
-      }
-
-      .day-label {
-        font-size: 0.55rem;
-      }
-
-      .months-row {
-        margin-left: 20px;
-      }
-
-      .month-label {
-        font-size: 0.6rem;
-      }
-
-      .legend {
-        font-size: 0.65rem;
-        gap: 0.25rem;
-      }
-
-      footer {
-        padding: 1.5rem 0;
-        font-size: 0.75rem;
-      }
+      
+      body { padding: 0.5rem; }
+      
+      .timeline { padding-left: 1rem; }
+      .timeline::before { width: 1px; }
+      .year-section::before { left: -1rem; width: 6px; height: 6px; }
+      .year-section { margin-bottom: 1.5rem; }
+      
+      h1 { font-size: 1.25rem; }
+      .username { font-size: 0.9rem; }
+      .stats { gap: 0.75rem; font-size: 0.75rem; flex-wrap: wrap; }
+      
+      .year-title { font-size: 1rem; }
+      .year-count { font-size: 0.75rem; }
+      
+      .graph-container { padding: 0.5rem; }
+      .day-labels { width: 16px; margin-right: 2px; }
+      .day-label { font-size: 0.45rem; }
+      .months-row { margin-left: 18px; }
+      .month-label { font-size: 0.5rem; }
+      .legend { font-size: 0.55rem; }
+      
+      .theme-toggle { top: 0.4rem; right: 0.4rem; padding: 0.3rem; font-size: 0.85rem; }
+      footer { padding: 0.75rem 0; font-size: 0.65rem; }
     }
 
-    /* Extra small screens */
-    @media (max-width: 380px) {
+    @media (max-width: 520px) {
       :root {
         --cell-size: 6px;
         --cell-gap: 1px;
       }
+      
+      .timeline { padding-left: 0; }
+      .timeline::before { display: none; }
+      .year-section::before { display: none; }
+      
+      .day-labels { width: 12px; }
+      .months-row { margin-left: 14px; }
+      .legend { font-size: 0.5rem; }
+    }
 
-      .day-labels {
-        display: none;
+    @media (max-width: 400px) {
+      :root {
+        --cell-size: 5px;
+        --cell-gap: 1px;
       }
+      
+      .day-labels { display: none; }
+      .months-row { margin-left: 0; }
+      .legend { font-size: 0.45rem; }
+    }
 
-      .months-row {
-        margin-left: 0;
+    @media (max-width: 340px) {
+      :root {
+        --cell-size: 4px;
+        --cell-gap: 1px;
       }
+      
+      .months-row { display: none; }
+      .graph-container { padding: 0.3rem; }
     }
   </style>
 </head>
@@ -570,7 +466,6 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
         🌙
       </button>
-      <div class="logo">📊</div>
       <h1>Git History Timeline</h1>
       <div class="username">@${username}</div>
       <div class="stats">
@@ -599,7 +494,11 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
     </footer>
   </div>
 
+  <!-- Tooltip element -->
+  <div class="tooltip" id="tooltip"></div>
+
   <script>
+    // Theme toggle
     function toggleTheme() {
       const html = document.documentElement;
       const current = html.getAttribute('data-theme');
@@ -615,6 +514,41 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
       document.documentElement.setAttribute('data-theme', savedTheme);
       document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
     }
+
+    // Tooltip handling
+    const tooltip = document.getElementById('tooltip');
+    
+    document.querySelectorAll('.day[data-tooltip]').forEach(day => {
+      day.addEventListener('mouseenter', (e) => {
+        const text = e.target.getAttribute('data-tooltip');
+        if (!text) return;
+        
+        tooltip.textContent = text;
+        tooltip.classList.add('visible');
+        
+        const rect = e.target.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+        let top = rect.top - tooltipRect.height - 8;
+        
+        // Keep tooltip on screen
+        if (left < 8) left = 8;
+        if (left + tooltipRect.width > window.innerWidth - 8) {
+          left = window.innerWidth - tooltipRect.width - 8;
+        }
+        if (top < 8) {
+          top = rect.bottom + 8; // Show below if no room above
+        }
+        
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      });
+      
+      day.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+      });
+    });
   </script>
 </body>
 </html>`;
@@ -624,7 +558,7 @@ export function renderTimeline({ username, commits, totalCommits, repoCount }) {
  * Render a single year section
  */
 function renderYear(year, commits) {
-  const calendar = generateYearCalendar(year, commits.byYear, commits.maxDaily);
+  const calendar = generateYearCalendar(year, commits.byYear, commits.yearMaxDaily);
   const yearTotal = commits.yearTotals[year] || 0;
   
   // Generate month labels
@@ -652,7 +586,6 @@ function renderYear(year, commits) {
 
   return `
     <div class="year-section">
-      <div class="year-marker"></div>
       <div class="year-header">
         <span class="year-title">${year}</span>
         <span class="year-count">${yearTotal.toLocaleString()} commits</span>

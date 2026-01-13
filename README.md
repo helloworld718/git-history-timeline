@@ -202,6 +202,64 @@ git-history-timeline/
 
 ---
 
+## GitHub Pages Deployment
+
+This project includes a GitHub Action that automatically builds and deploys your timeline to GitHub Pages.
+
+### Setup
+
+1. **Enable GitHub Pages** in your repository:
+   - Go to Settings → Pages
+   - Under "Build and deployment", select **GitHub Actions** as the source
+
+2. **Add GitHub Token Secret**:
+   - Go to Settings → Secrets and variables → Actions
+   - Click "New repository secret"
+   - Name: `GH_TIMELINE_TOKEN`
+   - Value: Your GitHub Personal Access Token (with `repo` and `read:user` scopes)
+
+3. **Trigger Deployment**:
+   
+   Create and push a release tag with semantic versioning (without `v` prefix):
+   
+   ```bash
+   git tag 1.0.0
+   git push origin 1.0.0
+   ```
+   
+   Or manually trigger from the Actions tab.
+
+Your timeline will be available at: `https://<username>.github.io/<repository-name>/`
+
+### Release Versioning
+
+The workflow triggers on semantic version tags **without** the `v` prefix:
+
+- ✅ Valid: `1.0.0`, `2.1.3`, `1.0.0-beta.1`, `3.2.1-rc.2`
+- ❌ Invalid: `v1.0.0`, `v2.1.3`, `release-1.0.0`
+
+```bash
+# Create a release
+git tag 1.0.0
+git push origin 1.0.0
+
+# Pre-release versions also work
+git tag 2.0.0-beta.1
+git push origin 2.0.0-beta.1
+```
+
+### About the Token
+
+**Important:** The GitHub Action needs **two tokens**:
+
+1. **`GITHUB_TOKEN`** (automatic) - Used by GitHub Actions to deploy to Pages. This is automatically provided by GitHub and requires no setup.
+
+2. **`GH_TIMELINE_TOKEN`** (manual) - Used to fetch your git history from the GitHub API. You must add this as a repository secret.
+
+The workflow automatically runs when you push a semantic version tag (without `v` prefix), or you can trigger it manually from the Actions tab.
+
+---
+
 ## Troubleshooting
 
 ### "Error: GITHUB_TOKEN not found"

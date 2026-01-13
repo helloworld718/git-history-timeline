@@ -31,20 +31,21 @@ export function aggregateCommits(commits) {
     repoSet.add(commit.repo);
   }
   
-  // Calculate year totals
+  // Calculate year totals and per-year max daily commits
   const yearTotals = {};
-  for (const year of Object.keys(byYear)) {
-    yearTotals[year] = Object.values(byYear[year]).reduce((a, b) => a + b, 0);
-  }
+  const yearMaxDaily = {};
   
-  // Find max commits in a single day (for color scaling)
-  const maxDaily = Math.max(...Object.values(byDate), 0);
+  for (const year of Object.keys(byYear)) {
+    const yearDailyCounts = Object.values(byYear[year]);
+    yearTotals[year] = yearDailyCounts.reduce((a, b) => a + b, 0);
+    yearMaxDaily[year] = Math.max(...yearDailyCounts, 0);
+  }
   
   return {
     byDate,
     byYear,
     yearTotals,
-    maxDaily,
+    yearMaxDaily,  // Per-year max for proper color scaling
     repoCount: repoSet.size,
     years: Object.keys(byYear).sort((a, b) => b - a) // Descending
   };
@@ -75,9 +76,14 @@ export function getContributionLevel(count, maxDaily) {
 /**
  * Generate calendar data for a year
  * Returns an array of weeks, each containing 7 days
+ * 
+ * @param {string} year - The year to generate
+ * @param {object} byYear - Commits organized by year
+ * @param {object} yearMaxDaily - Per-year max daily commits for color scaling
  */
-export function generateYearCalendar(year, byYear, maxDaily) {
+export function generateYearCalendar(year, byYear, yearMaxDaily) {
   const yearData = byYear[year] || {};
+  const maxDaily = yearMaxDaily[year] || 1; // Use THIS year's max for color scaling
   const weeks = [];
   
   // Start from the first day of the year
