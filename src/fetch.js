@@ -195,10 +195,7 @@ async function searchCommitsByAuthor(username, token, commitMap, repoSet) {
         }
       }
       
-      // Show progress only in interactive terminals (not in CI)
-      if (process.stdout.isTTY && !process.env.CI) {
-        process.stdout.write(`\r   Searched ${page * 100} of ${Math.min(totalFound, 1000)} commits...`);
-      }
+      process.stdout.write(`\r   Searched ${page * 100} of ${Math.min(totalFound, 1000)} commits...`);
       
       // Check if we've got all results
       if (data.items.length < 100 || page * 100 >= totalFound) {
@@ -216,10 +213,7 @@ async function searchCommitsByAuthor(username, token, commitMap, repoSet) {
     }
   }
   
-  // Clear progress line (only if we were showing progress)
-  if (process.stdout.isTTY && !process.env.CI) {
-    process.stdout.write('\r' + ' '.repeat(60) + '\r');
-  }
+  process.stdout.write('\r' + ' '.repeat(60) + '\r');
   console.log(`✓ Found ${newCommits} additional commits from ${totalFound} total public contributions`);
   
   return newCommits;
@@ -352,22 +346,20 @@ export async function fetchAllCommits(token, targetUser = null, repoFilter = 'al
             updated_at: new Date().toISOString()
           };
           
-          // Show progress only in interactive terminals (not in CI)
-          if (process.stdout.isTTY && !process.env.CI) {
-            process.stdout.write(`\r${progress} Processing: ${repo.name.padEnd(40)}`);
-          }
+          // Show progress (hide repo names in CI for security)
+          const displayName = process.env.CI ? '[repository]' : repo.name;
+          process.stdout.write(`\r${progress} Processing: ${displayName.padEnd(40)}`);
         } catch (err) {
           // Skip repos we can't access
           if (!err.message.includes('403') && !err.message.includes('404')) {
-            console.log(`\n   ⚠️  Skipping ${repo.name}: ${err.message}`);
+            const displayName = process.env.CI ? '[repository]' : repo.name;
+            console.log(`\n   ⚠️  Skipping ${displayName}: ${err.message}`);
           }
         }
       });
       
-      // Clear progress line (only if we were showing progress)
-      if (process.stdout.isTTY && !process.env.CI) {
-        process.stdout.write('\r' + ' '.repeat(80) + '\r');
-      }
+      // Clear progress line
+      process.stdout.write('\r' + ' '.repeat(80) + '\r');
       console.log(`✓ Processed ${reposToUpdate.length} updated repositories`);
       console.log(`✓ Found ${newCommitsInPhase1} new commits`);
     }
