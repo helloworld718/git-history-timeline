@@ -39,7 +39,7 @@ Full contribution history with theme toggle and stats.
 ### Animated Widget (`dist/widget.html`)
 High-velocity animation through 16 years in 30 seconds.
 
-![Widget Animation](docs/widget.gif)
+![Widget Animation](docs/widget-demo.gif)
 
 ```html
 <iframe 
