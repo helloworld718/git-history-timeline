@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Configuration Demo - Git History Timeline</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f6f8fa;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #24292f;
+      margin-bottom: 1rem;
+    }
+
+    .intro {
+      text-align: center;
+      color: #57606a;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .demo-card {
+      background: white;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .demo-card h2 {
+      color: #24292f;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .demo-card p {
+      color: #57606a;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .demo-card code {
+      background: #f6f8fa;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #0969da;
+    }
+
+    .iframe-container {
+      border: 2px solid #d0d7de;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 400px;
+      border: none;
+      display: block;
+    }
+
+    .url-display {
+      background: #f6f8fa;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 0.75rem;
+      color: #24292f;
+      word-break: break-all;
+      border: 1px solid #d0d7de;
+    }
+
+    .comparison {
+      background: white;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .comparison h2 {
+      color: #24292f;
+      margin-bottom: 1rem;
+    }
+
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .comparison th,
+    .comparison td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #d0d7de;
+    }
+
+    .comparison th {
+      background: #f6f8fa;
+      font-weight: 600;
+      color: #24292f;
+    }
+
+    .comparison td {
+      color: #57606a;
+    }
+
+    .comparison code {
+      background: #f6f8fa;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #0969da;
+    }
+
+      @media (max-width: 768px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
+  <script>
+    // Auto-resize all iframes
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'resize') {
+        document.querySelectorAll('iframe').forEach(function(iframe) {
+          iframe.style.height = event.data.height + 'px';
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Theme Configuration Demo</h1>
+    <p class="intro">
+      The embed version supports theme configuration via URL parameters. 
+      Compare the different theme options below to see which works best for your use case.
+    </p>
+
+    <div class="demo-grid">
+      <!-- Light Theme -->
+      <div class="demo-card">
+        <h2>☀️ Light Theme</h2>
+        <p>Perfect for light-colored websites and documentation. Uses <code>?theme=light</code> parameter.</p>
+        <div class="iframe-container">
+          <iframe src="../dist/index-embed.html?theme=light"></iframe>
+        </div>
+        <div class="url-display">
+          src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=light"
+        </div>
+      </div>
+
+      <!-- Dark Theme -->
+      <div class="demo-card">
+        <h2>🌙 Dark Theme</h2>
+        <p>Perfect for dark-colored websites and portfolios. Uses <code>?theme=dark</code> parameter.</p>
+        <div class="iframe-container">
+          <iframe src="../dist/index-embed.html?theme=dark"></iframe>
+        </div>
+        <div class="url-display">
+          src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=dark"
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto Theme -->
+    <div class="demo-card">
+      <h2>🔄 Auto Theme (Default)</h2>
+      <p>Adapts to user's system preference or saved preference. No theme parameter needed.</p>
+      <div class="iframe-container">
+        <iframe src="../dist/index-embed.html"></iframe>
+      </div>
+      <div class="url-display">
+        src="https://yourusername.github.io/git-history-timeline/index-embed.html"
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison">
+      <h2>📊 Theme Parameter Reference</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>URL Parameter</th>
+            <th>Result</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>?theme=light</code></td>
+            <td>Forces light theme</td>
+            <td>Light-themed sites, documentation, blogs</td>
+          </tr>
+          <tr>
+            <td><code>?theme=dark</code></td>
+            <td>Forces dark theme</td>
+            <td>Dark-themed sites, portfolios, presentations</td>
+          </tr>
+          <tr>
+            <td><code>(no parameter)</code></td>
+            <td>Auto-detect theme</td>
+            <td>Flexible embedding, respects user preference</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: #24292f;">Usage Examples</h3>
+      
+      <h4 style="color: #57606a; font-size: 0.9rem; margin-bottom: 0.5rem;">Light Theme</h4>
+      <div class="url-display">
+&lt;iframe src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=light" 
+        width="100%" height="800" frameborder="0"&gt;&lt;/iframe&gt;
+      </div>
+
+      <h4 style="color: #57606a; font-size: 0.9rem; margin-bottom: 0.5rem; margin-top: 1rem;">Dark Theme</h4>
+      <div class="url-display">
+&lt;iframe src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=dark" 
+        width="100%" height="800" frameborder="0"&gt;&lt;/iframe&gt;
+      </div>
+
+      <h4 style="color: #57606a; font-size: 0.9rem; margin-bottom: 0.5rem; margin-top: 1rem;">Auto Theme</h4>
+      <div class="url-display">
+&lt;iframe src="https://yourusername.github.io/git-history-timeline/index-embed.html" 
+        width="100%" height="800" frameborder="0"&gt;&lt;/iframe&gt;
+      </div>
+    </div>
+  </div>
+</body>
+</html>

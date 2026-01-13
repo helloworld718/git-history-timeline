@@ -11,7 +11,7 @@ import dotenv from 'dotenv';
 dotenv.config({ override: true });
 import { fetchAllCommits } from './fetch.js';
 import { aggregateCommits } from './aggregate.js';
-import { renderTimeline } from './render.js';
+import { renderTimeline, renderTimelineEmbed } from './render.js';
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -19,6 +19,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CACHE_FILE = join(__dirname, '..', '.cache', 'commits.json');
 const OUTPUT_FILE = join(__dirname, '..', 'dist', 'index.html');
+const OUTPUT_EMBED_FILE = join(__dirname, '..', 'dist', 'index-embed.html');
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -88,12 +89,15 @@ async function main() {
 
   // Render HTML
   console.log('\n🎨 Generating timeline...');
-  const html = renderTimeline({
+  const renderData = {
     username,
     commits: aggregated,
     totalCommits,
     repoCount: aggregated.repoCount
-  });
+  };
+  
+  const html = renderTimeline(renderData);
+  const htmlEmbed = renderTimelineEmbed(renderData);
 
   // Write output
   const outputDir = dirname(OUTPUT_FILE);
@@ -101,8 +105,10 @@ async function main() {
     mkdirSync(outputDir, { recursive: true });
   }
   writeFileSync(OUTPUT_FILE, html);
+  writeFileSync(OUTPUT_EMBED_FILE, htmlEmbed);
   
   console.log(`\n✅ Generated: dist/index.html`);
+  console.log(`✅ Generated: dist/index-embed.html (embeddable version)`);
 }
 
 main().catch(err => {

@@ -86,8 +86,9 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 This will:
 1. Fetch all repositories you have access to
 2. Retrieve commits from all branches
-3. Generate `dist/index.html`
-4. Open it in your browser
+3. Generate `dist/index.html` (full page)
+4. Generate `dist/index-embed.html` (embeddable version)
+5. Open the full page in your browser
 
 ### Options
 
@@ -146,15 +147,96 @@ The tool caches repository data to speed up subsequent runs:
 
 ## Output
 
-A single, self-contained `dist/index.html` file containing:
+The tool generates two self-contained HTML files:
 
+### `dist/index.html` (Full Page)
+- Complete standalone page with header and footer
 - Year-by-year contribution matrices
 - Total commit counts
 - Interactive tooltips
 - Dark/light theme toggle
 - Zero external dependencies
 
-Share it, host it, or keep it local — it's just one file.
+### `dist/index-embed.html` (Embeddable)
+- Same visualization without header title and theme toggle
+- No footer
+- Perfect for embedding in other pages or iframes
+- Includes username and stats bar
+- Minimal chrome for clean embedding
+- **Theme control via URL**: `?theme=light` or `?theme=dark`
+- **Auto-height support**: Automatically resizes iframe to content height
+
+Share it, host it, or keep it local — each is just one file.
+
+---
+
+## Embedding
+
+The `index-embed.html` file is designed for embedding in other pages:
+
+### Using an iframe
+
+**With auto-height (recommended):**
+
+```html
+<iframe 
+  id="git-timeline"
+  src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=dark" 
+  width="100%" 
+  frameborder="0"
+  style="border: 1px solid #30363d; border-radius: 6px;">
+</iframe>
+
+<script>
+  // Auto-resize iframe to content height
+  window.addEventListener('message', function(event) {
+    if (event.data.type === 'resize') {
+      document.getElementById('git-timeline').style.height = event.data.height + 'px';
+    }
+  });
+</script>
+```
+
+**Or with fixed height:**
+
+```html
+<iframe 
+  src="https://yourusername.github.io/git-history-timeline/index-embed.html?theme=light" 
+  width="100%" 
+  height="800" 
+  frameborder="0"
+  style="border: 1px solid #d0d7de; border-radius: 6px;">
+</iframe>
+```
+
+### Theme Configuration
+
+Control the theme via URL parameter:
+- `?theme=light` - Force light theme (perfect for light-colored sites)
+- `?theme=dark` - Force dark theme (perfect for dark-colored sites)
+- No parameter - Auto-detect from system preference
+
+### Direct inclusion
+
+Since it's a self-contained HTML file, you can also:
+- Include it directly in documentation
+- Embed it in your portfolio
+- Add it to your personal website
+- Share it in presentations
+
+The embed version excludes:
+- ❌ "Git History Timeline" header text
+- ❌ Theme toggle button
+- ❌ Footer with links
+
+But includes:
+- ✅ Username display
+- ✅ Commit/repo/year statistics
+- ✅ Full contribution timeline
+- ✅ Interactive tooltips
+- ✅ Responsive design
+
+📖 **[Read the full Embedding Guide](docs/EMBEDDING.md)** for more examples and customization options.
 
 ---
 
@@ -187,16 +269,22 @@ git-history-timeline/
 ├── src/
 │   ├── fetch.js          # GitHub API client
 │   ├── aggregate.js      # Commit processing
-│   └── render.js         # HTML generation
-├── templates/
-│   └── index.html        # HTML template
+│   ├── render.js         # HTML generation (full & embed)
+│   └── index.js          # Main entry point
 ├── dist/
-│   └── index.html        # Generated output
+│   ├── index.html        # Full page output
+│   └── index-embed.html  # Embeddable output
+├── docs/
+│   └── EMBEDDING.md      # Embedding guide
 ├── spec/
 │   └── SPEC.md           # Technical specification
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # GitHub Pages deployment
 ├── .env.example          # Example configuration
 ├── package.json
 ├── run.sh                # Easy run script
+├── RELEASING.md          # Release guide
 └── README.md
 ```
 

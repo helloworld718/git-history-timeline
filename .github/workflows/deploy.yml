@@ -45,7 +45,7 @@ jobs:
           # Use the secret token you'll add for fetching git history
           GITHUB_TOKEN: ${{ secrets.GH_TIMELINE_TOKEN }}
         run: |
-          # Run the generator without opening browser
+          # Run the generator (creates both index.html and index-embed.html)
           node src/index.js
       
       - name: Upload artifact
