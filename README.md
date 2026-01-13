@@ -25,6 +25,12 @@ echo "GITHUB_TOKEN=ghp_your_token_here" > .env
 
 Get your token at [github.com/settings/tokens/new](https://github.com/settings/tokens/new) (needs `repo` and `read:user` scopes).
 
+## Screenshots
+
+| Light Mode | Dark Mode |
+|------------|-----------|
+| ![Light Mode](docs/screenshot-light.png) | ![Dark Mode](docs/screenshot-dark.png) |
+
 ## What You Get
 
 ### Static Timeline (`dist/index.html`)
@@ -32,6 +38,8 @@ Full contribution history with theme toggle and stats.
 
 ### Animated Widget (`dist/widget.html`)
 High-velocity animation through 16 years in 30 seconds.
+
+![Widget Animation](docs/widget.gif)
 
 ```html
 <iframe 
