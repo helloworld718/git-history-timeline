@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_FILE = join(__dirname, '..', 'dist', 'widget-data.json');
-const TEMPLATE_FILE = join(__dirname, '..', 'dist', 'widget.html');
+const TEMPLATE_FILE = join(__dirname, '..', 'templates', 'widget.html.template');
 const OUTPUT_FILE = join(__dirname, '..', 'dist', 'widget.html');
 
 function buildWidget() {

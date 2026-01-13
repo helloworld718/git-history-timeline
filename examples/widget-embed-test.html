@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Widget Embed Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #0d1117;
+      color: #f0f6fc;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #58a6ff;
+      margin-bottom: 2rem;
+    }
+
+    .test-case {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .test-case h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #f0f6fc;
+    }
+
+    .test-case p {
+      color: #8b949e;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .status.pass {
+      background: #1a7f37;
+      color: #ffffff;
+    }
+
+    .status.pending {
+      background: #9e6a03;
+      color: #ffffff;
+    }
+
+    iframe {
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      width: 100%;
+      display: block;
+      background: #0d1117;
+    }
+
+    .code {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+    }
+
+    .code code {
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      color: #79c0ff;
+      white-space: pre;
+    }
+
+    .results {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+    }
+
+    .results h3 {
+      color: #f0f6fc;
+      margin-bottom: 1rem;
+    }
+
+    .results ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .results li {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: #161b22;
+      border-radius: 4px;
+      color: #8b949e;
+    }
+
+    .results li.pass {
+      border-left: 3px solid #1a7f37;
+    }
+
+    .results li.fail {
+      border-left: 3px solid #da3633;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Widget Embed Test Suite</h1>
+
+    <!-- Test 1: Basic Embed -->
+    <div class="test-case">
+      <h2>Test 1: Basic Embed <span class="status pending" id="status1">Testing...</span></h2>
+      <p>Default configuration with 30-second duration and dark theme</p>
+      <iframe 
+        src="../dist/widget.html?duration=30&theme=dark&autoplay=true"
+        height="300"
+        id="widget1">
+      </iframe>
+      <div class="code">
+        <code>&lt;iframe src="../dist/widget.html?duration=30&theme=dark&autoplay=true" width="100%" height="300"&gt;&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Test 2: Fast Animation -->
+    <div class="test-case">
+      <h2>Test 2: Fast Animation (5s) <span class="status pending" id="status2">Testing...</span></h2>
+      <p>Ultra-fast animation to test performance</p>
+      <iframe 
+        src="../dist/widget.html?duration=5&theme=dark&autoplay=true"
+        height="300"
+        id="widget2">
+      </iframe>
+      <div class="code">
+        <code>&lt;iframe src="../dist/widget.html?duration=5&theme=dark&autoplay=true" width="100%" height="300"&gt;&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Test 3: Light Theme -->
+    <div class="test-case">
+      <h2>Test 3: Light Theme <span class="status pending" id="status3">Testing...</span></h2>
+      <p>Testing light theme variant</p>
+      <iframe 
+        src="../dist/widget.html?duration=20&theme=light&autoplay=true"
+        height="300"
+        id="widget3">
+      </iframe>
+      <div class="code">
+        <code>&lt;iframe src="../dist/widget.html?duration=20&theme=light&autoplay=true" width="100%" height="300"&gt;&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Test 4: Slow Animation -->
+    <div class="test-case">
+      <h2>Test 4: Slow Animation (60s) <span class="status pending" id="status4">Testing...</span></h2>
+      <p>Slower animation for detailed viewing</p>
+      <iframe 
+        src="../dist/widget.html?duration=60&theme=dark&autoplay=true"
+        height="300"
+        id="widget4">
+      </iframe>
+      <div class="code">
+        <code>&lt;iframe src="../dist/widget.html?duration=60&theme=dark&autoplay=true" width="100%" height="300"&gt;&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Test 5: Small Container -->
+    <div class="test-case">
+      <h2>Test 5: Small Container (Mobile) <span class="status pending" id="status5">Testing...</span></h2>
+      <p>Testing responsive behavior in small container</p>
+      <div style="max-width: 400px; margin: 0 auto;">
+        <iframe 
+          src="../dist/widget.html?duration=15&theme=dark&autoplay=true"
+          height="250"
+          id="widget5">
+        </iframe>
+      </div>
+      <div class="code">
+        <code>&lt;div style="max-width: 400px;"&gt;
+  &lt;iframe src="../dist/widget.html?duration=15&theme=dark&autoplay=true" width="100%" height="250"&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code>
+      </div>
+    </div>
+
+    <!-- Test Results -->
+    <div class="results">
+      <h3>Test Results</h3>
+      <ul id="resultsList">
+        <li>Waiting for tests to complete...</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Test tracking
+    const tests = {
+      widget1: { name: 'Basic Embed', loaded: false, animated: false },
+      widget2: { name: 'Fast Animation', loaded: false, animated: false },
+      widget3: { name: 'Light Theme', loaded: false, animated: false },
+      widget4: { name: 'Slow Animation', loaded: false, animated: false },
+      widget5: { name: 'Small Container', loaded: false, animated: false }
+    };
+
+    // Listen for resize messages (indicates widget is working)
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'git-history-widget-resize') {
+        // Find which iframe sent the message
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+          if (iframe.contentWindow === event.source) {
+            const testId = iframe.id;
+            if (tests[testId]) {
+              tests[testId].animated = true;
+              updateStatus(testId);
+            }
+          }
+        });
+      }
+    });
+
+    // Check if iframes loaded
+    document.querySelectorAll('iframe').forEach(iframe => {
+      iframe.addEventListener('load', () => {
+        const testId = iframe.id;
+        if (tests[testId]) {
+          tests[testId].loaded = true;
+          updateStatus(testId);
+        }
+      });
+    });
+
+    // Update status badge
+    function updateStatus(testId) {
+      const test = tests[testId];
+      const statusEl = document.getElementById('status' + testId.replace('widget', ''));
+      
+      if (test.loaded && test.animated) {
+        statusEl.textContent = 'PASS';
+        statusEl.className = 'status pass';
+      } else if (test.loaded) {
+        statusEl.textContent = 'Loaded...';
+        statusEl.className = 'status pending';
+      }
+      
+      updateResults();
+    }
+
+    // Update results summary
+    function updateResults() {
+      const resultsList = document.getElementById('resultsList');
+      const results = [];
+      
+      for (const [id, test] of Object.entries(tests)) {
+        const status = test.loaded && test.animated ? 'pass' : 'pending';
+        const icon = status === 'pass' ? '✓' : '⏳';
+        results.push(`<li class="${status}">${icon} ${test.name}: ${test.loaded ? 'Loaded' : 'Loading...'} ${test.animated ? '& Animating' : ''}</li>`);
+      }
+      
+      resultsList.innerHTML = results.join('');
+    }
+
+    // Initial update
+    updateResults();
+
+    // Auto-update every 2 seconds
+    setInterval(updateResults, 2000);
+
+    // Log test completion after 10 seconds
+    setTimeout(() => {
+      console.log('Test Results:', tests);
+      
+      const allPassed = Object.values(tests).every(t => t.loaded && t.animated);
+      if (allPassed) {
+        console.log('✅ All tests passed!');
+      } else {
+        console.log('⚠️ Some tests incomplete');
+      }
+    }, 10000);
+  </script>
+</body>
+</html>

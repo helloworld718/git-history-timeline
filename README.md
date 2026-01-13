@@ -4,7 +4,7 @@ Visualize your complete GitHub contribution history. Every commit, every branch,
 
 [![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
 
-**[View Demo](https://kibotu.github.io/git-history-timeline/)** • **[Try Widget](dist/widget-demo.html)**
+**[View Demo](https://kibotu.github.io/git-history-timeline/)** • **[Try Widget](examples/widget-demo.html)**
 
 ## Why
 
@@ -127,14 +127,24 @@ First run takes ~5 minutes for large accounts. Subsequent runs take ~30 seconds 
 - **52×7 grid** showing 365-day rolling window
 - **GitHub-style** contribution colors
 
-## Files Generated
+## Project Structure
 
 ```
-dist/
+dist/                       # Generated files (git-ignored)
 ├── index.html              # Full page with theme toggle
 ├── index-embed.html        # Embeddable version
 ├── widget.html             # Animated widget (257KB)
-└── widget-demo.html        # Widget demo page
+└── widget-data.json        # Widget data
+
+templates/                  # Build templates
+└── widget.html.template    # Widget HTML template
+
+examples/                   # Demo and test files
+├── widget-demo.html        # Widget showcase
+└── widget-embed-test.html  # Embedding tests
+
+docs/                       # GitHub Pages
+└── theme-demo.html         # Theme configuration demo
 ```
 
 ## Caching

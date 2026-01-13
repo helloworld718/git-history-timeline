@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git History Widget Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #0d1117;
+      color: #f0f6fc;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #58a6ff;
+    }
+
+    .subtitle {
+      color: #8b949e;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .demo-section {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .demo-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #f0f6fc;
+    }
+
+    .demo-section p {
+      color: #8b949e;
+      margin-bottom: 1rem;
+    }
+
+    .widget-wrapper {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    iframe {
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      display: block;
+    }
+
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #79c0ff;
+      white-space: pre;
+    }
+
+    .params-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .params-table th,
+    .params-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .params-table th {
+      color: #f0f6fc;
+      font-weight: 600;
+      background: #0d1117;
+    }
+
+    .params-table td {
+      color: #8b949e;
+    }
+
+    .params-table code {
+      font-family: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #79c0ff;
+      background: #0d1117;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .grid-item {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+
+    .grid-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: #f0f6fc;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .demo-section {
+        padding: 1rem;
+      }
+
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 Git History Animation Widget</h1>
+    <p class="subtitle">A high-velocity animated visualization of 16 years of GitHub commits</p>
+
+    <!-- Main Demo -->
+    <div class="demo-section">
+      <h2>Default Configuration (30 seconds)</h2>
+      <p>This widget animates through the entire commit history in 30 seconds, showing a rolling 365-day window.</p>
+      <div class="widget-wrapper">
+        <iframe 
+          src="../dist/widget.html?duration=30&theme=dark&autoplay=true"
+          height="300"
+          id="widget1">
+        </iframe>
+      </div>
+      <div class="code-block">
+        <code>&lt;iframe 
+  src="../dist/widget.html?duration=30&theme=dark&autoplay=true"
+  width="100%"
+  height="300"
+  frameborder="0"
+  style="border: none; border-radius: 8px;"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Fast Demo -->
+    <div class="demo-section">
+      <h2>Fast Animation (10 seconds)</h2>
+      <p>Speed through the history in just 10 seconds for a quick overview.</p>
+      <div class="widget-wrapper">
+        <iframe 
+          src="../dist/widget.html?duration=10&theme=dark&autoplay=true"
+          height="300"
+          id="widget2">
+        </iframe>
+      </div>
+      <div class="code-block">
+        <code>&lt;iframe 
+  src="../dist/widget.html?duration=10&theme=dark&autoplay=true"
+  width="100%"
+  height="300"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Light Theme Demo -->
+    <div class="demo-section">
+      <h2>Light Theme (60 seconds)</h2>
+      <p>A slower, more detailed view with light theme for better visibility in bright environments.</p>
+      <div class="widget-wrapper">
+        <iframe 
+          src="../dist/widget.html?duration=60&theme=light&autoplay=true"
+          height="300"
+          id="widget3">
+        </iframe>
+      </div>
+      <div class="code-block">
+        <code>&lt;iframe 
+  src="../dist/widget.html?duration=60&theme=light&autoplay=true"
+  width="100%"
+  height="300"&gt;
+&lt;/iframe&gt;</code>
+      </div>
+    </div>
+
+    <!-- Configuration Reference -->
+    <div class="demo-section">
+      <h2>URL Parameters</h2>
+      <p>Customize the widget behavior using URL parameters:</p>
+      
+      <table class="params-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Default</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>duration</code></td>
+            <td>Animation duration in seconds</td>
+            <td><code>30</code></td>
+            <td><code>?duration=60</code></td>
+          </tr>
+          <tr>
+            <td><code>theme</code></td>
+            <td>Color theme</td>
+            <td><code>dark</code></td>
+            <td><code>?theme=light</code></td>
+          </tr>
+          <tr>
+            <td><code>autoplay</code></td>
+            <td>Start animation automatically</td>
+            <td><code>true</code></td>
+            <td><code>?autoplay=false</code></td>
+          </tr>
+          <tr>
+            <td><code>speed</code></td>
+            <td>Playback speed multiplier (0.1-10)</td>
+            <td><code>1.0</code></td>
+            <td><code>?speed=2.0</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Responsive Demo -->
+    <div class="demo-section">
+      <h2>Responsive Design</h2>
+      <p>The widget adapts to different container sizes. Here are examples at various widths:</p>
+      
+      <div class="grid-layout">
+        <div class="grid-item">
+          <h3>Small (Mobile)</h3>
+          <iframe 
+            src="../dist/widget.html?duration=20&theme=dark&autoplay=true"
+            height="200"
+            style="max-width: 320px;">
+          </iframe>
+        </div>
+        
+        <div class="grid-item">
+          <h3>Medium (Tablet)</h3>
+          <iframe 
+            src="../dist/widget.html?duration=20&theme=dark&autoplay=true"
+            height="250"
+            style="max-width: 500px;">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="demo-section">
+      <h2>Features</h2>
+      <ul style="color: #8b949e; margin-left: 1.5rem; line-height: 1.8;">
+        <li>🚀 High-velocity animation through 16 years of commit history</li>
+        <li>📊 Rolling 365-day contribution matrix (52 weeks × 7 days)</li>
+        <li>🎨 GitHub-style contribution colors with dark/light themes</li>
+        <li>📱 Fully responsive design (320px to desktop)</li>
+        <li>⚡ 60fps smooth animation using requestAnimationFrame</li>
+        <li>📦 Self-contained HTML file (no external dependencies)</li>
+        <li>🔧 Configurable duration, theme, and autoplay</li>
+        <li>📅 Year indicator showing current date range</li>
+        <li>🔄 Loops continuously for endless viewing</li>
+        <li>💾 Only 257KB including all data</li>
+      </ul>
+    </div>
+
+    <!-- Technical Details -->
+    <div class="demo-section">
+      <h2>Technical Details</h2>
+      <div class="grid-layout">
+        <div class="grid-item">
+          <h3>Data</h3>
+          <p style="color: #8b949e;">
+            • 5,844 days of commit history<br>
+            • 38,376 total commits<br>
+            • 2,364 days with commits<br>
+            • Date range: 2011-2026
+          </p>
+        </div>
+        
+        <div class="grid-item">
+          <h3>Performance</h3>
+          <p style="color: #8b949e;">
+            • 60 FPS animation<br>
+            • Efficient DOM updates<br>
+            • CSS custom properties<br>
+            • requestAnimationFrame API
+          </p>
+        </div>
+        
+        <div class="grid-item">
+          <h3>Compatibility</h3>
+          <p style="color: #8b949e;">
+            • Modern browsers (ES6+)<br>
+            • Mobile & desktop optimized<br>
+            • iframe-ready<br>
+            • CSP-friendly
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage Instructions -->
+    <div class="demo-section">
+      <h2>How to Use</h2>
+      <ol style="color: #8b949e; margin-left: 1.5rem; line-height: 1.8;">
+        <li>Copy the <code style="color: #79c0ff;">widget.html</code> file to your web server</li>
+        <li>Embed it using an iframe with your desired parameters</li>
+        <li>Customize the appearance using URL parameters</li>
+        <li>The widget will automatically resize to fit its container</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Auto-resize iframes based on messages from widgets
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'git-history-widget-resize') {
+        // Find all iframes and update their height
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+          if (iframe.contentWindow === event.source) {
+            iframe.style.height = event.data.height + 'px';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
