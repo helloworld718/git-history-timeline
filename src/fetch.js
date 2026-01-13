@@ -346,7 +346,10 @@ export async function fetchAllCommits(token, targetUser = null, repoFilter = 'al
             updated_at: new Date().toISOString()
           };
           
-          process.stdout.write(`\r${progress} Processing: ${repo.name.padEnd(40)}`);
+          // Show progress only in interactive terminals (not in CI)
+          if (process.stdout.isTTY && !process.env.CI) {
+            process.stdout.write(`\r${progress} Processing: ${repo.name.padEnd(40)}`);
+          }
         } catch (err) {
           // Skip repos we can't access
           if (!err.message.includes('403') && !err.message.includes('404')) {
@@ -355,8 +358,10 @@ export async function fetchAllCommits(token, targetUser = null, repoFilter = 'al
         }
       });
       
-      // Clear progress line
-      process.stdout.write('\r' + ' '.repeat(80) + '\r');
+      // Clear progress line (only if we were showing progress)
+      if (process.stdout.isTTY && !process.env.CI) {
+        process.stdout.write('\r' + ' '.repeat(80) + '\r');
+      }
       console.log(`✓ Processed ${reposToUpdate.length} updated repositories`);
       console.log(`✓ Found ${newCommitsInPhase1} new commits`);
     }
